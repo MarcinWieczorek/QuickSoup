@@ -6,9 +6,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -77,7 +80,7 @@ public class QuickSoup extends JavaPlugin implements CommandExecutor {
 		}
 
 		int index = 0;
-		for(ItemStack itemStack : player.getInventory().getStorageContents()) {
+		for(ItemStack itemStack : getContents(player.getInventory())) {
 			if(getConfig().getBoolean("fillemptyslots") && (itemStack == null || itemStack.getType() == Material.AIR) || itemStack.getType() == Material.BOWL) {
 				player.getInventory().setItem(index, new ItemStack(Material.MUSHROOM_SOUP, 1));
 			}
@@ -86,5 +89,21 @@ public class QuickSoup extends JavaPlugin implements CommandExecutor {
 		}
 
 		return true;
+	}
+
+	public static ItemStack[] getContents(Inventory inventory) {
+		try {
+			try {
+				Method getStorageContentsMethod = Inventory.class.getMethod("getStorageContents");
+				return (ItemStack[]) getStorageContentsMethod.invoke(inventory);
+			}
+			catch(InvocationTargetException | IllegalAccessException e) {
+				e.printStackTrace();
+				return new ItemStack[0];
+			}
+		}
+		catch(NoSuchMethodException e) {
+			return inventory.getContents();
+		}
 	}
 }

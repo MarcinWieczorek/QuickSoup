@@ -1,0 +1,32 @@
+# 1s 1m 1h 1d 1w 1mo 1y
+cooldown: 10m
+fillemptyslots: true
+
+message:
+ prefix: "&9[&6QuickSoup&9] &7"
+ nopermissions: "You don't have enough permissions"
+ consolesender: "You cannot perform this command from the console"
+ refilled: "Soup refilled!"
+ cooldown: "You need to wait {TIME}"
+ timeunit:
+  second:
+   singular: second
+   plural: seconds
+  minute:
+   singular: minute
+   plural: minutes
+  hour:
+   singular: hour
+   plural: hours
+  day:
+   singular: day
+   plural: days
+  week:
+   singular: week
+   plural: weeks
+  month:
+   singular: month
+   plural: months
+  year:
+   singular: year
+   plural: years

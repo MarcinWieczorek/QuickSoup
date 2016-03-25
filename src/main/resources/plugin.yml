@@ -1,0 +1,7 @@
+name: QuickSoup
+version: 1.0
+author: Marcin (CTRL) Wieczorek
+main: co.marcin.quicksoup.QuickSoup
+commands:
+ quicksoup:
+  description: Refill your soup
